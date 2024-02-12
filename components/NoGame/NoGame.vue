@@ -39,7 +39,7 @@
     <view class="empty" style="height: 110rpx;"></view>
     <view class="logo-holder">
       <view class="logo">
-        <text v-for="text of textList">{{text}}</text>
+        <text v-for="text of textList" :key="text">{{text}}</text>
       </view>
       <view class="play-button">开始</view>
       <view class="hint">
@@ -67,6 +67,17 @@
       </view>
     </view>
     <view class="clouds"></view>
+    <view class="waves">
+      <view class="top_wave"></view>
+      <view class="wave1"></view>
+      <view class="wave2"></view>
+      <view class="wave3"></view>
+      <view class="wave4"></view>
+    </view>
+    <view class="mounts">
+      <view class="mount1"></view>
+      <view class="mount2"></view>
+    </view>
   </view>
 </template>
 
@@ -163,11 +174,11 @@
     width: 100%;
     transition: opacity 1s linear;
     opacity: 0;
-    
+
     &.o0 {
       opacity: 0;
     }
-    
+
     &.o1 {
       opacity: 1;
     }
@@ -217,8 +228,7 @@
     }
 
     .section-2 {
-      .bar {
-      }
+      .bar {}
     }
 
     .section-3 {
@@ -248,14 +258,83 @@
     margin-bottom: 250rpx;
   }
 
-  .clouds {
+  .clouds,
+  .waves,
+  .mounts {
     position: absolute;
+    z-index: -1;
+  }
+
+  .clouds {
     width: 100%;
     left: 0;
     top: 320rpx;
     height: 280rpx;
     background: url(/static/icons/clouds.svg) repeat-x;
     background-position-x: 170rpx;
-    z-index: -1;
+  }
+
+  .waves,
+  .mounts {
+    position: absolute;
+    width: 100%;
+    height: 400rpx;
+    left: 0;
+    bottom: 0;
+  }
+
+  .waves view,
+  .mounts view {
+    position: absolute;
+    width: 100%;
+  }
+
+  .top_wave {
+    background: url(/static/icons/top_wave.png) repeat-x 0 -2rpx;
+    height: 35rpx;
+    bottom: 0;
+    z-index: 10001;
+  }
+
+  .wave1 {
+    background: url(/static/icons/wave1.svg) repeat-x;
+    height: 150rpx;
+    bottom: 0;
+    z-index: 23;
+  }
+
+  .wave2 {
+    background: url(/static/icons/wave2.svg) repeat-x;
+    height: 180rpx;
+    bottom: 30rpx;
+    z-index: 22;
+  }
+
+  .wave3 {
+    background: url(/static/icons/wave3.svg) repeat-x;
+    height: 180rpx;
+    bottom: 90rpx;
+    z-index: 21;
+  }
+
+  .wave4 {
+    background: url(/static/icons/wave4.svg) repeat-x;
+    height: 180rpx;
+    bottom: 120rpx;
+    z-index: 20;
+  }
+
+  .mount1 {
+    background: url(/static/icons/mount1.svg) repeat-x;
+    height: 150rpx;
+    bottom: 280rpx;
+    z-index: 11;
+  }
+
+  .mount2 {
+    background: url(/static/icons/mount2.svg) repeat-x;
+    height: 150rpx;
+    bottom: 290rpx;
+    z-index: 10;
   }
 </style>
