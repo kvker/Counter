@@ -107,7 +107,7 @@
     width: 513rpx;
     height: 162rpx;
     background-color: #4C4660;
-    border: 4rpx solid #FF4571;
+    border: 8rpx solid #FF4571;
     border-radius: 68rpx;
     text-align: center;
     margin-top: -10%;
@@ -218,12 +218,6 @@
 
     .section-2 {
       .bar {
-        cursor: url(https://greghub.github.io/coloron/public/svg/cursor.svg), pointer;
-
-        &:focus,
-        &:active {
-          cursor: url(https://greghub.github.io/coloron/public/svg/cursor-tap.svg), pointer;
-        }
       }
     }
 
@@ -241,7 +235,7 @@
 
   .ball,
   .ball-demo {
-    background: url(https://greghub.github.io/coloron/public/svg/ball.svg) right bottom;
+    background: url(/static/icons/ball.svg) right bottom;
     background-size: 64rpx 64rpx;
     width: 53rpx;
     height: 53rpx;
@@ -257,10 +251,10 @@
   .clouds {
     position: absolute;
     width: 100%;
-    left: 100rpx;
-    top: 400rpx;
-    height: 151rpx;
-    background: url(https://greghub.github.io/coloron/public/svg/clouds.svg) repeat-x;
+    left: 0;
+    top: 320rpx;
+    height: 280rpx;
+    background: url(/static/icons/clouds.svg) repeat-x;
     background-position-x: 170rpx;
     z-index: -1;
   }
