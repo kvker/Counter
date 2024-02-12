@@ -5,15 +5,16 @@ type Game = {
 
 type SubGame = {
   name : string,
+  players : Player[],
   history : HistoryItem[],
 }
 
 type HistoryItem = {
   timestamp : number,
-  user : User,
+  player : Player,
   score : number,
 }
 
-type User = {
+type Player = {
   name : string,
 }

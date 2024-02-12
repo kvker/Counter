@@ -2,14 +2,7 @@
   import { ref, inject } from 'vue'
   import type { Ref } from 'vue'
 
-  const game = inject('game') as Ref<Game>
-  function onCreateGame() {
-    game.value = {
-      name: 'new game',
-      children: [],
-    }
-    console.log(game)
-  }
+  const onCreateGame = inject('onCreateGame') as Function
 
   // 特效
 
