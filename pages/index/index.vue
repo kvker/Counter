@@ -1,13 +1,16 @@
 <script lang="ts" setup>
-  import { ref, computed } from 'vue'
+  import { ref, computed, provide } from 'vue'
+  import type { PropType } from 'vue'
+
+  const game = ref<Game>(uni.getStorageSync('game') as Game || null)
+  provide('game', game)
 </script>
 
 <template>
-  <view class="page">
-
-  </view>
+  <NoGame v-if="!game"></NoGame>
+  <Game v-else></Game>
 </template>
 
-<style>
+<style scoped>
 
 </style>

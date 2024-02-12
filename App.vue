@@ -27,10 +27,10 @@
 
   page,
   .page {
-    background: linear-gradient(180deg, #D4E3FF 0%, #FFF 100%);
+    background-color: #28DAD4;
   }
   
   .component {
-    height: 100vh;
+    
   }
 </style>
