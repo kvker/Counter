@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { ref, provide } from 'vue'
+  import { ref, provide, watch } from 'vue'
   import { onShareAppMessage } from '@dcloudio/uni-app'
   import { confirm } from '@/services/ui'
 
@@ -38,10 +38,24 @@
   function onCreateGame() {
     game.value = {
       name: '游戏' + new Date().toLocaleString(),
-      children: [1],
+      children: [],
       completed: false,
     }
   }
+
+
+  // 自动更新本地储存
+  let updatingTimeout = 0
+  watch(game, (newValue) => {
+    if (!newValue) return
+    clearTimeout(updatingTimeout)
+    updatingTimeout = setTimeout(() => {
+      games[games.length - 1] = game.value
+      uni.setStorageSync('mainData', mainData)
+    }, 1000)
+  }, {
+    deep: true,
+  })
 
   function onCleanGame() {
     game.value = null

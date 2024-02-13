@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { inject, computed } from 'vue'
+  import { inject, ref, computed, watch } from 'vue'
   import type { Ref } from 'vue'
   import { confirm } from '@/services/ui'
 
@@ -61,14 +61,15 @@
         onCleanGame()
       })
   }
-  
+
   console.log(game.value)
 </script>
 
 <template>
-  <view class="component flex-c aic jcc h-100">
+  <view class="component flex-c aic jcsb h-100">
+    <input v-model.lazy="game.name" class="title name-input mt-80 w-100 text-center" />
     <view class="playground">
-      
+
     </view>
     <view class="controls flex aic jcc">
       <view class="button restart" @click="onRestart">重开</view>
@@ -78,6 +79,17 @@
 </template>
 
 <style lang="less" scoped>
+  .name-input {
+    height: 80rpx;
+    border: none;
+    background-color: transparent;
+  }
+
+  .title {
+    color: white;
+    font-size: 48rpx;
+  }
+
   .button {
     display: flex;
     align-items: center;
