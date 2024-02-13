@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import { ref, provide, watch } from 'vue'
   import { onShareAppMessage } from '@dcloudio/uni-app'
-  import { confirm } from '@/services/ui'
+  import { confirm, toast } from '@/services/ui'
 
   onShareAppMessage(() => {
     return {
@@ -52,7 +52,7 @@
       console.log('自动保存成功')
       console.log(mainData)
       uni.setStorageSync('mainData', mainData)
-    }, 1000)
+    }, 3000)
   }, {
     deep: true,
   })

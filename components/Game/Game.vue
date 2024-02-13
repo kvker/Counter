@@ -35,13 +35,6 @@
   }
 
   // event
-  function onRestart() {
-    confirm('重开将清空所有数据，请确认？')
-      .then(ret => {
-        onCleanGame()
-      })
-  }
-
   function onNextSubGame() {
     confirm('请确认本局数据是否正确？')
       .then(ret => {
@@ -61,23 +54,28 @@
   function onSubtractPlayer(index = currentPlayers.value.length) {
     currentPlayers.value.length && currentPlayers.value.splice(index, 1)
   }
+
+  function onUpdatePlayer(params : { player : Player, index : number }) {
+    currentSubGame.value.players[params.index] = params.player
+  }
 </script>
 
 <template>
-  <view class="component flex-c aic jcsb h-100">
+  <view class="component flex-c aic jcsb h-100 px-20">
     <input v-model.lazy="game.name" class="title name-input mt-40 w-100 text-center" />
     <input v-model.lazy="currentSubGame.name" class="title sub-name-input mt-10 w-100 text-center" />
     <view class="playground w-100 f1">
       <view class="players">
         <Player v-for="(player, index) of currentSubGame.players" :key="index" :player="player"
-          @update:player="(player: Player) => currentSubGame.players[currentSubGame.players.length -1] = player">
+          @update:player="onUpdatePlayer" :index="index">
         </Player>
       </view>
     </view>
-    <view class="controls flex aic jcc mb-80 mt-10">
-      <view class="button restart" @click="onRestart">重开</view>
-      <view class="button restart" @click="onAddPlayer">加玩家</view>
-      <view class="button restart" @click="onSubtractPlayer">减玩家</view>
+    <view class="controls flex aic jcsb mb-80 mt-10 w-100">
+      <view class="flex">
+        <view class="button restart" @click="onAddPlayer">加玩家</view>
+        <view class="button restart" @click="onSubtractPlayer">减玩家</view>
+      </view>
       <view class="button next-sub-game" @click="onNextSubGame">下局</view>
     </view>
   </view>
@@ -112,7 +110,6 @@
 
     &.next-sub-game {
       width: 240rpx;
-      margin-left: 100rpx;
     }
   }
 </style>
