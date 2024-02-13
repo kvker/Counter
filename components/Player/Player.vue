@@ -64,11 +64,19 @@
     color: white;
     font-weight: bold;
 
-    &:nth-of-type(2n + 1) {
+    &:nth-of-type(1) {
       background-color: #FF4571;
     }
 
-    &:nth-of-type(2n) {
+    &:nth-of-type(2) {
+      background-color: #FF4571;
+    }
+    
+    &:nth-of-type(3) {
+      background-color: #815FF8;
+    }
+    
+    &:nth-of-type(4) {
       background-color: #815FF8;
     }
   }

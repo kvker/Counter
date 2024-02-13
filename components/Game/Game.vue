@@ -64,7 +64,7 @@
   <view class="component flex-c aic jcsb h-100 px-20">
     <input v-model.lazy="game.name" class="title name-input mt-40 w-100 text-center" />
     <input v-model.lazy="currentSubGame.name" class="title sub-name-input mt-10 w-100 text-center" />
-    <view class="playground w-100 f1">
+    <view class="playground w-100 f1 scroll-y">
       <view class="players">
         <Player v-for="(player, index) of currentSubGame.players" :key="index" :player="player"
           @update:player="onUpdatePlayer" :index="index">
