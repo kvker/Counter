@@ -9,10 +9,12 @@
     }
   })
 
+  const MAIN_DATA = 'mainData'
+
   const game = ref<Game | null>(uni.getStorageSync('game') as Game || null)
   provide('game', game)
 
-  const mainData = uni.getStorageSync('mainData') || { games: [] } as MainData
+  const mainData = uni.getStorageSync(MAIN_DATA) || { games: [] } as MainData
 
   // TODO：如果有未完成的对局，则提示加载，放弃加载则自动保存最后的游戏数据并开始新的游戏
   let games = mainData.games
@@ -20,21 +22,11 @@
   function onContinueLastGame() {
     game.value = lastGame
   }
-  // if (lastGame && !lastGame.completed) {
-  //   confirm(`您有未结束的"${lastGame.name}"，是否加载？`)
-  //     .then(() => {
-  //       game.value = lastGame
-  //     })
-  //     .catch(() => {
-  //       lastGame.completed = true
-  //       mainData.games.push(game.value)
-  //     })
-  // }
 
   function onCreateGame() {
     if (lastGame && !lastGame.comleted) {
       lastGame.completed = true
-      uni.setStorageSync('mainData', mainData)
+      uni.setStorageSync(MAIN_DATA, mainData)
     }
     game.value = {
       name: '游戏' + Date.now(),
@@ -46,6 +38,10 @@
 
   function onResetGame() {
     game.value = null
+    uni.removeStorageSync(MAIN_DATA)
+    uni.reLaunch({
+      url: '/pages/index/index'
+    })
   }
 
   // 自动更新本地储存
@@ -63,7 +59,7 @@
       }
       console.log('自动保存成功')
       console.log(mainData)
-      uni.setStorageSync('mainData', mainData)
+      uni.setStorageSync(MAIN_DATA, mainData)
     }, 1000)
   }, {
     deep: true,
