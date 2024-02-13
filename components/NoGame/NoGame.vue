@@ -6,6 +6,9 @@
   const onCreateGame = inject('onCreateGame') as Function
   const onResetGame = inject('onResetGame') as Function
 
+  const props = defineProps(['lastGame'])
+  const emit = defineEmits(['continue'])
+
   // 特效
 
   const text = '万能计数器'
@@ -50,6 +53,10 @@
         onResetGame()
       })
   }
+  
+  function onContinue() {
+    emit('continue')
+  }
 </script>
 
 <template>
@@ -62,6 +69,11 @@
       <view class="play-button">开始</view>
       <view class="hint">
         <text><text style="color: red;">简单、通用</text>，最棒的计数器</text>
+      </view>
+    </view>
+    <view class="last-holder" v-if="props.lastGame" @click="onContinue">
+      <view class="last">
+        <text>继续上局</text>
       </view>
     </view>
     <view class="how-to-play" :class="typingEnd ? 'o1' : 'o0'">
@@ -148,7 +160,7 @@
       color: #fff;
       text-transform: uppercase;
       font-weight: 900;
-      font-size: 80rpx;
+      font-size: 64rpx;
       line-height: 100rpx;
       height: 100rpx;
       margin-top: 10rpx;
@@ -186,6 +198,31 @@
         color: white;
         font-size: 32rpx;
       }
+    }
+  }
+
+  .last-holder {
+    position: fixed;
+    top: 240rpx;
+    right: 5vw;
+    width: 200rpx;
+    height: 80rpx;
+    background-color: #4C4660;
+    border: 4rpx solid #FF4571;
+    border-radius: 20rpx;
+    text-align: center;
+    z-index: 999;
+
+    .last {
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 32rpx;
+      line-height: 50rpx;
+      height: 60rpx;
+      margin-top: 10rpx;
+      margin-bottom: 4rpx;
+      text-align: center;
     }
   }
 

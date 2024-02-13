@@ -17,23 +17,31 @@
   // TODO：如果有未完成的对局，则提示加载，放弃加载则自动保存最后的游戏数据并开始新的游戏
   let games = mainData.games
   const lastGame = games[games.length - 1]
-  if (lastGame && !lastGame.completed) {
-    confirm(`您有未结束的"${lastGame.name}"，是否加载？`)
-      .then(() => {
-        game.value = lastGame
-      })
-      .catch(() => {
-        lastGame.completed = true
-        mainData.games.push(game.value)
-      })
+  function onContinueLastGame() {
+    game.value = lastGame
   }
+  // if (lastGame && !lastGame.completed) {
+  //   confirm(`您有未结束的"${lastGame.name}"，是否加载？`)
+  //     .then(() => {
+  //       game.value = lastGame
+  //     })
+  //     .catch(() => {
+  //       lastGame.completed = true
+  //       mainData.games.push(game.value)
+  //     })
+  // }
 
   function onCreateGame() {
+    if (lastGame && !lastGame.comleted) {
+      lastGame.completed = true
+      uni.setStorageSync('mainData', mainData)
+    }
     game.value = {
       name: '游戏' + Date.now(),
       children: [],
       completed: false,
     }
+    mainData.games.push(game.value)
   }
 
   function onResetGame() {
@@ -66,7 +74,7 @@
 </script>
 
 <template>
-  <NoGame v-if="!game"></NoGame>
+  <NoGame v-if="!game" :lastGame="lastGame" @continue="onContinueLastGame"></NoGame>
   <Game v-else></Game>
 </template>
 

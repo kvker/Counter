@@ -5,12 +5,6 @@
   import lc from '@/static/libs/lc'
   import { alert, loading, unloading, toast, } from '@/services/ui'
 
-  onLoad(() => { })
-
-  onReachBottom(() => { })
-
-  onPullDownRefresh(() => { })
-
   onShareAppMessage(() => ({
     title: '万能计数器',
     path: '/pages/index/index'
