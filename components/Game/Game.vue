@@ -17,7 +17,6 @@
       children[0] = {
         name: '对局' + new Date().toLocaleString(),
         players: [],
-        history: [],
       }
       return children[0]
     }
@@ -32,22 +31,6 @@
   }
 
   function doDeletePlayer(player : Player, index : number) {
-
-  }
-
-  const history = computed<HistoryItem[]>(() => {
-    return currentSubGame.value.history || []
-  })
-
-  function doPushHistory(historyItem : HistoryItem) {
-
-  }
-
-  function doDeleteHistory(historyItem : HistoryItem, index : number) {
-
-  }
-
-  function doUpdateHistory(historyItem : HistoryItem, index : number) {
 
   }
 
@@ -67,6 +50,17 @@
   }
 
   console.log(game.value)
+
+  function onAddPlayer() {
+    currentPlayers.value.push({
+      name: '玩家' + (currentPlayers.value.length + 1),
+      score: 0,
+    })
+  }
+
+  function onSubtractPlayer(index = currentPlayers.value.length) {
+    currentPlayers.value.length && currentPlayers.value.splice(index, 1)
+  }
 </script>
 
 <template>
@@ -74,10 +68,16 @@
     <input v-model.lazy="game.name" class="title name-input mt-40 w-100 text-center" />
     <input v-model.lazy="currentSubGame.name" class="title sub-name-input mt-10 w-100 text-center" />
     <view class="playground w-100 f1">
-
+      <view class="players">
+        <Player v-for="(player, index) of currentSubGame.players" :key="index" :player="player"
+          @update:player="(player: Player) => currentSubGame.players[currentSubGame.players.length -1] = player">
+        </Player>
+      </view>
     </view>
     <view class="controls flex aic jcc mb-80 mt-10">
       <view class="button restart" @click="onRestart">重开</view>
+      <view class="button restart" @click="onAddPlayer">加一玩家</view>
+      <view class="button restart" @click="onSubtractPlayer">减一玩家</view>
       <view class="button next-sub-game" @click="onNextSubGame">下局</view>
     </view>
   </view>
