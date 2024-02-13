@@ -27,17 +27,9 @@
       })
   }
 
-  // uni.setStorageSync('mainData', {
-  //   games: [{
-  //     name: '游戏' + new Date().toLocaleString(),
-  //     children: [1],
-  //     completed: false,
-  //   }]
-  // })
-
   function onCreateGame() {
     game.value = {
-      name: '游戏' + new Date().toLocaleString(),
+      name: '游戏' + Date.now(),
       children: [],
       completed: false,
     }
@@ -50,8 +42,15 @@
     if (!newValue) return
     clearTimeout(updatingTimeout)
     updatingTimeout = setTimeout(() => {
+      let lastGame = games[games.length - 1]
+      // 可能是 null
+      if (lastGame || lastGame === null) {
+        games[games.length - 1] = newValue
+      } else {
+        games[0] = newValue
+      }
       console.log('自动保存成功')
-      games[games.length - 1] = game.value
+      console.log(mainData)
       uni.setStorageSync('mainData', mainData)
     }, 1000)
   }, {

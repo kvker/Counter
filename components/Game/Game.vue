@@ -15,7 +15,7 @@
       return lastChild
     } else {
       children[0] = {
-        name: '对局' + new Date().toLocaleString(),
+        name: '对局' + Date.now(),
         players: [],
       }
       return children[0]
@@ -76,8 +76,8 @@
     </view>
     <view class="controls flex aic jcc mb-80 mt-10">
       <view class="button restart" @click="onRestart">重开</view>
-      <view class="button restart" @click="onAddPlayer">加一玩家</view>
-      <view class="button restart" @click="onSubtractPlayer">减一玩家</view>
+      <view class="button restart" @click="onAddPlayer">加玩家</view>
+      <view class="button restart" @click="onSubtractPlayer">减玩家</view>
       <view class="button next-sub-game" @click="onNextSubGame">下局</view>
     </view>
   </view>
