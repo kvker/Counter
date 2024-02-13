@@ -52,7 +52,7 @@
   }
 
   function onSubtractPlayer() {
-    currentPlayers.value.length && currentPlayers.value.splice(currentPlayers.value.length - 1, 1)
+    currentPlayers.value.length > 1 && currentPlayers.value.splice(currentPlayers.value.length - 1, 1)
   }
 
   function onUpdatePlayer(params : { player : Player, index : number }) {
