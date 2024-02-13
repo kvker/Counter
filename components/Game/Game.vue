@@ -6,16 +6,20 @@
   const game = inject('game') as Ref<Game>
   const onCleanGame = inject('onCleanGame') as Function
 
-  const currentSubGame = computed<SubGame>(() => {
-    let children = game.value.children
-    return children[children.length - 1] || doCreateSubGame()
-  })
+  const currentSubGame : Ref<SubGame> = ref(doCreateSubGame())
 
   function doCreateSubGame() : SubGame {
-    return {
-      name: 'new subgame',
-      players: [],
-      history: [],
+    const children = game.value.children
+    const lastChild = children[children.length - 1]
+    if (lastChild) {
+      return lastChild
+    } else {
+      children[0] = {
+        name: '对局' + new Date().toLocaleString(),
+        players: [],
+        history: [],
+      }
+      return children[0]
     }
   }
 
@@ -67,11 +71,12 @@
 
 <template>
   <view class="component flex-c aic jcsb h-100">
-    <input v-model.lazy="game.name" class="title name-input mt-80 w-100 text-center" />
-    <view class="playground">
+    <input v-model.lazy="game.name" class="title name-input mt-40 w-100 text-center" />
+    <input v-model.lazy="currentSubGame.name" class="title sub-name-input mt-10 w-100 text-center" />
+    <view class="playground w-100 f1">
 
     </view>
-    <view class="controls flex aic jcc">
+    <view class="controls flex aic jcc mb-80 mt-10">
       <view class="button restart" @click="onRestart">重开</view>
       <view class="button next-sub-game" @click="onNextSubGame">下局</view>
     </view>
@@ -81,13 +86,17 @@
 <style lang="less" scoped>
   .name-input {
     height: 80rpx;
-    border: none;
-    background-color: transparent;
+    font-size: 48rpx;
+  }
+
+  .sub-name-input {
+    font-size: 32rpx;
   }
 
   .title {
     color: white;
-    font-size: 48rpx;
+    border: none;
+    background-color: transparent;
   }
 
   .button {

@@ -50,6 +50,7 @@
     if (!newValue) return
     clearTimeout(updatingTimeout)
     updatingTimeout = setTimeout(() => {
+      console.log('自动保存成功')
       games[games.length - 1] = game.value
       uni.setStorageSync('mainData', mainData)
     }, 1000)
