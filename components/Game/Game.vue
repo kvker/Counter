@@ -4,21 +4,29 @@
   import { confirm } from '@/services/ui'
 
   const game = inject('game') as Ref<Game>
-  const onCleanGame = inject('onCleanGame') as Function
 
   const currentSubGame : Ref<SubGame> = ref(doCreateSubGame())
 
-  function doCreateSubGame() : SubGame {
+  function doCreateSubGame(newOne = false) : SubGame {
     const children = game.value.children
     const lastChild = children[children.length - 1]
-    if (lastChild) {
-      return lastChild
+    const newSubGame : SubGame = {
+      name: '对局' + Date.now(),
+      players: [{
+        name: '玩家1',
+        score: 0,
+      }],
+    }
+    if (newOne) {
+      children.push(newSubGame)
+      return children[children.length - 1]
     } else {
-      children[0] = {
-        name: '对局' + Date.now(),
-        players: [],
+      if (lastChild) {
+        return lastChild
+      } else {
+        children[0] = newSubGame
+        return children[0]
       }
-      return children[0]
     }
   }
 
@@ -26,19 +34,11 @@
     return currentSubGame.value.players || []
   })
 
-  function doPushPlayer(player : Player) {
-
-  }
-
-  function doDeletePlayer(player : Player, index : number) {
-
-  }
-
   // event
   function onNextSubGame() {
     confirm('请确认本局数据是否正确？')
       .then(ret => {
-        onCleanGame()
+        currentSubGame.value = doCreateSubGame(true)
       })
   }
 
@@ -51,8 +51,8 @@
     })
   }
 
-  function onSubtractPlayer(index = currentPlayers.value.length) {
-    currentPlayers.value.length && currentPlayers.value.splice(index, 1)
+  function onSubtractPlayer() {
+    currentPlayers.value.length && currentPlayers.value.splice(currentPlayers.value.length - 1, 1)
   }
 
   function onUpdatePlayer(params : { player : Player, index : number }) {

@@ -53,7 +53,7 @@
       console.log('自动保存成功')
       console.log(mainData)
       uni.setStorageSync('mainData', mainData)
-    }, 3000)
+    }, 1000)
   }, {
     deep: true,
   })
