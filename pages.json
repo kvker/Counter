@@ -5,6 +5,14 @@
       "style": {
         "navigationBarTitleText": "万能计数器"
       }
+    },
+    {
+      "path" : "pages/history/history",
+      "style" : 
+      {
+        "navigationBarTitleText" : "",
+        "enablePullDownRefresh" : false
+      }
     }
   ],
   "globalStyle": {

@@ -1,8 +1,10 @@
 <script lang="ts" setup>
   import { ref, inject } from 'vue'
   import type { Ref } from 'vue'
+  import { confirm, alert, toast } from '@/services/ui'
 
   const onCreateGame = inject('onCreateGame') as Function
+  const onResetGame = inject('onResetGame') as Function
 
   // 特效
 
@@ -22,15 +24,38 @@
       typingEnd.value = true
     }
   }
+
   setTimeout(() => {
     typing()
   }, 100)
+
+  function onGreat() {
+    alert('本项目完全开源，觉得不错，可以评价点个赞~右上角可以加入我的小程序哦')
+  }
+
+  function onCheckHistory() {
+    const mainData = uni.getStorageSync('mainData')
+    if (mainData && mainData.games && mainData.games.length) {
+      uni.navigateTo({
+        url: '/pages/history/history'
+      })
+    } else {
+      toast('您还没有数据呢')
+    }
+  }
+
+  function onCleanAndFix() {
+    confirm('重置或修复将清空数据，确认吗？')
+      .then(() => {
+        onResetGame()
+      })
+  }
 </script>
 
 <template>
-  <view class="component flex-c aic jcsb h-100 py-80" @click="onCreateGame">
+  <view class="component flex-c aic jcsb h-100 py-80">
     <view class="empty" style="height: 110rpx;"></view>
-    <view class="logo-holder">
+    <view class="logo-holder" @click="onCreateGame">
       <view class="logo">
         <text v-for="text of textList" :key="text">{{text}}</text>
       </view>
@@ -40,19 +65,22 @@
       </view>
     </view>
     <view class="how-to-play" :class="typingEnd ? 'o1' : 'o0'">
-      <view class="section section-1">
+      <view class="section section-1" @click="onGreat">
+        <view class="how-title">赏个糖果</view>
         <view class="content">
           <view class="ball-demo jump"></view>
         </view>
       </view>
-      <view class="section section-2">
+      <view class="section section-2" @click="onCheckHistory">
+        <view class="how-title">数据历史</view>
         <view class="content">
           <view class="bar bar-1"></view>
           <view class="bar bar-2"></view>
           <view class="bar bar-3"></view>
         </view>
       </view>
-      <view class="section section-3">
+      <view class="section section-3" @click="onCleanAndFix">
+        <view class="how-title">清空修复</view>
         <view class="content">
           <view class="ball-demo"></view>
           <view class="bar bar-1"></view>
@@ -174,6 +202,13 @@
 
     &.o1 {
       opacity: 1;
+    }
+
+    .how-title {
+      color: white;
+      font-weight: bold;
+      margin-bottom: 20rpx;
+      text-align: center;
     }
 
     .section-1,

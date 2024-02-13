@@ -36,6 +36,9 @@
     }
   }
 
+  function onResetGame() {
+    game.value = null
+  }
 
   // 自动更新本地储存
   let updatingTimeout = 0
@@ -59,6 +62,7 @@
   })
 
   provide('onCreateGame', onCreateGame)
+  provide('onResetGame', onResetGame)
 </script>
 
 <template>
