@@ -61,6 +61,8 @@
         onCleanGame()
       })
   }
+  
+  console.log(game.value)
 </script>
 
 <template>

@@ -1,6 +1,11 @@
+type MainData = {
+  games: Game[],
+}
+
 type Game = {
   name : string,
   children : SubGame[],
+  completed: boolean,
 }
 
 type SubGame = {
