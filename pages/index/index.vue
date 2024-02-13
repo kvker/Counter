@@ -23,6 +23,7 @@
         game.value = lastGame
       })
       .catch(() => {
+        lastGame.completed = true
         mainData.games.push(game.value)
       })
   }
@@ -57,11 +58,7 @@
     deep: true,
   })
 
-  function onCleanGame() {
-    game.value = null
-  }
   provide('onCreateGame', onCreateGame)
-  provide('onCleanGame', onCleanGame)
 </script>
 
 <template>
