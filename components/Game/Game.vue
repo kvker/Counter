@@ -71,19 +71,16 @@
   }
 
   function onNewGame() {
-    confirm('确认返回首页吗？')
-      .then(() => {
-        uni.reLaunch({
-          url: '/pages/index/index'
-        })
-      })
+    uni.reLaunch({
+      url: '/pages/index/index'
+    })
   }
 </script>
 
 <template>
   <view class="component flex-c aic jcsb h-100 px-20">
     <view class="flex aic jcsb w-100 mt-40">
-      <view class="back-button" @click="onNewGame">新游戏</view>
+      <view class="back-button" @click="onNewGame">返回</view>
       <input v-model.lazy="game.name" class="title name-input f1 text-center" />
       <view class="top-right-empty"></view>
     </view>
