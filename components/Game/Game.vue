@@ -4,7 +4,7 @@
   import { confirm } from '@/services/ui'
 
   const game = inject('game') as Ref<Game>
-
+  const onResetGame = inject('onResetGame') as Function
   const currentSubGame : Ref<SubGame> = ref(doCreateSubGame())
 
   function doCreateSubGame(newOne = false) : SubGame {
@@ -64,17 +64,29 @@
           currentSubGame.value.players.splice(index, 1)
         })
     }
-
   }
 
   function onUpdatePlayer(params : { player : Player, index : number }) {
     currentSubGame.value.players[params.index] = params.player
   }
+
+  function onNewGame() {
+    confirm('确认返回首页吗？')
+      .then(() => {
+        uni.reLaunch({
+          url: '/pages/index/index'
+        })
+      })
+  }
 </script>
 
 <template>
   <view class="component flex-c aic jcsb h-100 px-20">
-    <input v-model.lazy="game.name" class="title name-input mt-40 w-100 text-center" />
+    <view class="flex aic jcsb w-100 mt-40">
+      <view class="back-button" @click="onNewGame">新游戏</view>
+      <input v-model.lazy="game.name" class="title name-input f1 text-center" />
+      <view class="top-right-empty"></view>
+    </view>
     <input v-model.lazy="currentSubGame.name" class="title sub-name-input mt-10 w-100 text-center" />
     <view class="playground w-100 f1 scroll-y">
       <view class="players">
@@ -94,6 +106,13 @@
 </template>
 
 <style lang="less" scoped>
+  .top-right-empty,
+  .back-button {
+    width: 120rpx;
+    font-size: 32rpx;
+    color: white;
+  }
+
   .name-input {
     height: 80rpx;
     font-size: 48rpx;

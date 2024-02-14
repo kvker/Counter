@@ -1,7 +1,6 @@
 <script lang="ts" setup>
   import { ref, provide, watch } from 'vue'
-  import { onShareAppMessage } from '@dcloudio/uni-app'
-  import { confirm, toast } from '@/services/ui'
+  import { onShareAppMessage,  } from '@dcloudio/uni-app'
 
   onShareAppMessage(() => {
     return {
