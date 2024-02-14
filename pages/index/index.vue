@@ -28,7 +28,7 @@
       uni.setStorageSync(MAIN_DATA, mainData)
     }
     game.value = {
-      name: '游戏' + Date.now(),
+      name: '游戏' + ~~(Date.now() / 1000),
       children: [],
       completed: false,
     }

@@ -11,7 +11,7 @@
     const children = game.value.children
     const lastChild = children[children.length - 1]
     const newSubGame : SubGame = {
-      name: '对局' + Date.now(),
+      name: '对局' + ~~(Date.now() / 1000),
       players: [{
         name: '玩家1',
         score: 0,
