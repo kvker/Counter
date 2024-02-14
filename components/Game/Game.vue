@@ -85,19 +85,19 @@
       <view class="top-right-empty"></view>
     </view>
     <input v-model.lazy="currentSubGame.name" class="title sub-name-input mt-10 w-100 text-center" />
-    <view class="playground w-100 f1 scroll-y">
+    <view class="controls flex aic jcsb my-10 w-100">
+      <view class="flex">
+        <view class="button mr-10" @click="onAddPlayer">加人</view>
+        <view class="button" @click="onSubtractPlayer">减人</view>
+      </view>
+      <view class="button next-sub-game" @click="onNextSubGame">下局</view>
+    </view>
+    <view class="playground w-100 mb-40 f1 scroll-y">
       <view class="players">
         <Player v-for="(player, index) of currentSubGame.players" :key="player.timestamp" :player="player"
           @update:player="onUpdatePlayer" :index="index" @longtap.native="onDeletePlayer(player, index)">
         </Player>
       </view>
-    </view>
-    <view class="controls flex aic jcsb mb-80 mt-10 w-100">
-      <view class="flex">
-        <view class="button restart" @click="onAddPlayer">加玩家</view>
-        <view class="button restart" @click="onSubtractPlayer">减玩家</view>
-      </view>
-      <view class="button next-sub-game" @click="onNextSubGame">下局</view>
     </view>
   </view>
 </template>
@@ -130,11 +130,10 @@
     align-items: center;
     justify-content: center;
     width: 120rpx;
-    height: 80rpx;
-    border-radius: 40rpx;
-    border: 2rpx blueviolet solid;
-
-    &.restart {}
+    height: 64rpx;
+    border-radius: 16rpx;
+    border: 4rpx white solid;
+    color: white;
 
     &.next-sub-game {
       width: 240rpx;
