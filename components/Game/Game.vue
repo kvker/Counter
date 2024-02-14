@@ -87,8 +87,8 @@
     <input v-model.lazy="currentSubGame.name" class="title sub-name-input mt-10 w-100 text-center" />
     <view class="controls flex aic jcsb my-10 w-100">
       <view class="flex">
-        <view class="button mr-10" @click="onAddPlayer">加人</view>
-        <view class="button" @click="onSubtractPlayer">减人</view>
+        <view class="button mr-10" style="color: #FF4571;" @click="onSubtractPlayer">减人</view>
+        <view class="button" style="color: #815FF8;" @click="onAddPlayer">加人</view>
       </view>
       <view class="button next-sub-game" @click="onNextSubGame">下局</view>
     </view>
@@ -134,6 +134,7 @@
     border-radius: 16rpx;
     border: 4rpx white solid;
     color: white;
+    font-weight: bold;
 
     &.next-sub-game {
       width: 240rpx;
