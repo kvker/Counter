@@ -35,10 +35,10 @@
       <view>当前分数：<text class="bold" :style="{color: props.player.score > -1 ? 'red' : 'green'}">{{props.player.score}}</text></view>
     </view>
     <view class="controls flex aic jcsb">
-      <view class="button" @click="onChangeScore(-2)">-2</view>
+      <view class="button" @click="onChangeScore(-5)">-5</view>
       <view class="button" @click="onChangeScore(-1)">-1</view>
-      <view class="button" @click="onChangeScore(+1)">+1</view>
-      <view class="button" @click="onChangeScore(+2)">+2</view>
+      <view class="button" @click="onChangeScore(1)">+1</view>
+      <view class="button" @click="onChangeScore(5)">+5</view>
     </view>
   </view>
 </template>
@@ -55,28 +55,20 @@
   }
 
   .button {
-    width: 120rpx;
-    height: 64rpx;
-    line-height: 64rpx;
+    width: 20%;
+    height: 80rpx;
+    line-height: 80rpx;
     border-radius: 20rpx;
     text-align: center;
     border: 4rpx white solid;
     color: white;
     font-weight: bold;
 
-    &:nth-of-type(1) {
+    &:nth-of-type(-n + 3) {
       background-color: #FF4571;
     }
 
-    &:nth-of-type(2) {
-      background-color: #FF4571;
-    }
-    
-    &:nth-of-type(3) {
-      background-color: #815FF8;
-    }
-    
-    &:nth-of-type(4) {
+    &:nth-of-type(n + 3) {
       background-color: #815FF8;
     }
   }
