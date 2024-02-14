@@ -15,6 +15,7 @@
       players: [{
         name: '玩家1',
         score: 0,
+        timestamp: Date.now(),
       }],
     }
     if (newOne) {
@@ -48,11 +49,22 @@
     currentPlayers.value.push({
       name: '玩家' + (currentPlayers.value.length + 1),
       score: 0,
+      timestamp: Date.now(),
     })
   }
 
   function onSubtractPlayer() {
-    currentPlayers.value.length > 1 && currentPlayers.value.splice(currentPlayers.value.length - 1, 1)
+    currentPlayers.value.length > 1 && currentSubGame.value.players.splice(currentPlayers.value.length - 1, 1)
+  }
+
+  function onDeletePlayer(player : Player, index : number) {
+    if (currentPlayers.value.length > 1) {
+      confirm(`即将删除${player.name}，请确认？`)
+        .then(() => {
+          currentSubGame.value.players.splice(index, 1)
+        })
+    }
+
   }
 
   function onUpdatePlayer(params : { player : Player, index : number }) {
@@ -66,8 +78,8 @@
     <input v-model.lazy="currentSubGame.name" class="title sub-name-input mt-10 w-100 text-center" />
     <view class="playground w-100 f1 scroll-y">
       <view class="players">
-        <Player v-for="(player, index) of currentSubGame.players" :key="index" :player="player"
-          @update:player="onUpdatePlayer" :index="index">
+        <Player v-for="(player, index) of currentSubGame.players" :key="player.timestamp" :player="player"
+          @update:player="onUpdatePlayer" :index="index" @longtap.native="onDeletePlayer(player, index)">
         </Player>
       </view>
     </view>

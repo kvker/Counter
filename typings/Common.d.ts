@@ -16,4 +16,5 @@ type SubGame = {
 type Player = {
   name : string,
   score : number,
+  timestamp: number,
 }
