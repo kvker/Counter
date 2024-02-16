@@ -52,6 +52,8 @@
   
   .sub-game-name {
     font-size: 40rpx;
+    margin-top: 16rpx;
+    margin-bottom: 8rpx;
   }
   
   .player-name {
