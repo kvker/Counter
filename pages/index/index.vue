@@ -57,7 +57,7 @@
         games[0] = newValue
       }
       console.log('自动保存成功')
-      console.log(mainData)
+      // console.log(mainData)
       uni.setStorageSync(MAIN_DATA, mainData)
     }, 1000)
   }, {

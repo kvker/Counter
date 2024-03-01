@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-  import { ref, inject, toRef, watch } from 'vue'
-  import type { Ref } from 'vue'
+  import { toRef, watch } from 'vue'
 
   const props = defineProps(['player', 'index'])
   const emit = defineEmits(['update:player'])
@@ -52,6 +51,7 @@
   .name-input {
     border: none;
     background-color: transparent;
+    text-decoration: underline;
   }
 
   .button {

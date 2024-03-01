@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-  import { inject, ref, computed, watch } from 'vue'
+  import { inject, ref, computed } from 'vue'
   import type { Ref } from 'vue'
   import { confirm } from '@/services/ui'
 
   const game = inject('game') as Ref<Game>
-  const onResetGame = inject('onResetGame') as Function
   const currentSubGame : Ref<SubGame> = ref(doCreateSubGame())
 
   function doCreateSubGame(newOne = false) : SubGame {
@@ -43,7 +42,7 @@
       })
   }
 
-  console.log(game.value)
+  // console.log(game.value)
 
   function onAddPlayer() {
     currentPlayers.value.push({
@@ -123,6 +122,7 @@
     color: white;
     border: none;
     background-color: transparent;
+    text-decoration: underline;
   }
 
   .button {
